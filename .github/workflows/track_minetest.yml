@@ -1,0 +1,28 @@
+name: track_minetest
+
+# build on c/cpp changes or workflow changes
+on:
+  schedule:
+    # This cron line says to run every minute, but in practice github appears
+    # to run it sporadically every 7 to 15 minutes.
+    - cron: '* * * * *'
+
+permissions:
+  deployments: write
+  contents: write
+
+jobs:
+  # Current gcc version
+  update_repo:
+    runs-on: ubuntu-20.04
+    steps:
+      # Check out this repo
+      - uses: actions/checkout@v2
+      - name: Update minetest revision
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          ./update-revs.sh
+          ./push-revs.sh
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
