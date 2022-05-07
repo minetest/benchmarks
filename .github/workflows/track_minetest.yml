@@ -3,9 +3,8 @@ name: track_minetest
 # build on c/cpp changes or workflow changes
 on:
   schedule:
-    # This cron line says to run every minute, but in practice github appears
-    # to run it sporadically every 7 to 15 minutes.
-    - cron: '* * * * *'
+    # Run every 3 hours
+    - cron: '0 */3 * * *'
 
 permissions:
   deployments: write
