@@ -28,31 +28,33 @@ jobs:
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          ./update-revs.sh
-          ./push-revs.sh
-          echo "MINETEST_REV=$(cat minetest.rev)" >> $GITHUB_ENV
-          echo "IRRLICHT_REV=$(cat irrlicht.rev)" >> $GITHUB_ENV
+          ./update-revs.sh  # sets MINETEST_REV, IRRLICHT_REV
+          ./push-revs.sh    # sets DID_PUSH
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       # Checkout minetest
       - uses: actions/checkout@v2
+        if: ${{ env.DID_PUSH == 'true' }}
         with:
           repository: '${{ github.repository_owner }}/minetest'
           ref: ${{ env.MINETEST_REV }}
           path: 'minetest'
       # Checkout irrlicht
       - uses: actions/checkout@v2
+        if: ${{ env.DID_PUSH == 'true' }}
         with:
           repository: '${{ github.repository_owner }}/irrlicht'
           ref: ${{ env.IRRLICHT_REV }}
           path: 'minetest/lib/irrlichtmt'
       - name: Install deps
+        if: ${{ env.DID_PUSH == 'true' }}
         run: |
           pushd minetest
           source ./util/ci/common.sh --no-irr
           install_linux_deps g++-10
           popd
       - name: Build
+        if: ${{ env.DID_PUSH == 'true' }}
         run: |
           pushd minetest
           ./util/ci/build.sh
@@ -65,12 +67,14 @@ jobs:
           CMAKE_ENABLE_GETTEXT: FALSE
           CMAKE_FLAGS: "-DBUILD_BENCHMARKS=TRUE"
       - name: Run Benchmarks
+        if: ${{ env.DID_PUSH == 'true' }}
         run: |
           pushd minetest
           ./bin/minetest --run-benchmarks | tee ../output.txt
           popd
       # gh-pages branch is updated and pushed automatically with extracted benchmark data
       - name: Store benchmark result
+        if: ${{ env.DID_PUSH == 'true' }}
         uses: benchmark-action/github-action-benchmark@3d3bca03e83647895ef4f911fa57de3c7a391aaf
         with:
           name: Minetest Performance Benchmarks
