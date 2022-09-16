@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1663332867397,
+  "lastUpdate": 1663353512155,
   "repoUrl": "https://github.com/minetest/benchmarks",
   "entries": {
     "Minetest Performance Benchmarks": [
@@ -15960,6 +15960,196 @@ window.BENCHMARK_DATA = {
             "name": "deSerializeJsonStringIfNeeded_large_nonascii_with_space",
             "value": 454.67652,
             "range": "± 4.002190",
+            "unit": "us",
+            "extra": "100 samples\n1 iterations"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "name": "github-actions[bot]",
+            "username": "github-actions[bot]",
+            "email": "41898282+github-actions[bot]@users.noreply.github.com"
+          },
+          "committer": {
+            "name": "github-actions[bot]",
+            "username": "github-actions[bot]",
+            "email": "41898282+github-actions[bot]@users.noreply.github.com"
+          },
+          "id": "8e6d66be68b22ae24b8d2d3905b61ac1c2208823",
+          "message": "Minetest: a428a0cf37581a35f9c4f81c2e71633e6cc3dbb9 | Irrlicht: 3225007e8d31f09368c32406e2165828b8c2997a",
+          "timestamp": "2022-09-16T18:31:25Z",
+          "url": "https://github.com/minetest/benchmarks/commit/8e6d66be68b22ae24b8d2d3905b61ac1c2208823"
+        },
+        "date": 1663353511101,
+        "tool": "catch2",
+        "benches": [
+          {
+            "name": "serializeJsonStringIfNeeded_small_alpha",
+            "value": 0.013735,
+            "range": "± 0.000311",
+            "unit": "us",
+            "extra": "100 samples\n2163 iterations"
+          },
+          {
+            "name": "deSerializeJsonStringIfNeeded_small_alpha",
+            "value": 0.056778,
+            "range": "± 0.001425",
+            "unit": "us",
+            "extra": "100 samples\n552 iterations"
+          },
+          {
+            "name": "serializeJsonStringIfNeeded_small_alpha_with_space",
+            "value": 0.042271,
+            "range": "± 0.000079",
+            "unit": "us",
+            "extra": "100 samples\n706 iterations"
+          },
+          {
+            "name": "deSerializeJsonStringIfNeeded_small_alpha_with_space",
+            "value": 0.152752,
+            "range": "± 0.002738",
+            "unit": "us",
+            "extra": "100 samples\n196 iterations"
+          },
+          {
+            "name": "serializeJsonStringIfNeeded_large_alpha",
+            "value": 6.947682,
+            "range": "± 0.146580",
+            "unit": "us",
+            "extra": "100 samples\n5 iterations"
+          },
+          {
+            "name": "deSerializeJsonStringIfNeeded_large_alpha",
+            "value": 0.40618,
+            "range": "± 0.011253",
+            "unit": "us",
+            "extra": "100 samples\n74 iterations"
+          },
+          {
+            "name": "serializeJsonStringIfNeeded_large_alpha_with_space",
+            "value": 30.12536,
+            "range": "± 0.881928",
+            "unit": "us",
+            "extra": "100 samples\n1 iterations"
+          },
+          {
+            "name": "deSerializeJsonStringIfNeeded_large_alpha_with_space",
+            "value": 89.98008,
+            "range": "± 1.216871",
+            "unit": "us",
+            "extra": "100 samples\n1 iterations"
+          },
+          {
+            "name": "serializeJsonStringIfNeeded_small_escaped",
+            "value": 0.120924,
+            "range": "± 0.002848",
+            "unit": "us",
+            "extra": "100 samples\n244 iterations"
+          },
+          {
+            "name": "deSerializeJsonStringIfNeeded_small_escaped",
+            "value": 0.270003,
+            "range": "± 0.005272",
+            "unit": "us",
+            "extra": "100 samples\n111 iterations"
+          },
+          {
+            "name": "serializeJsonStringIfNeeded_small_escaped_with_space",
+            "value": 0.111102,
+            "range": "± 0.000882",
+            "unit": "us",
+            "extra": "100 samples\n267 iterations"
+          },
+          {
+            "name": "deSerializeJsonStringIfNeeded_small_escaped_with_space",
+            "value": 0.24172,
+            "range": "± 0.001281",
+            "unit": "us",
+            "extra": "100 samples\n124 iterations"
+          },
+          {
+            "name": "serializeJsonStringIfNeeded_large_escaped",
+            "value": 73.87087,
+            "range": "± 1.522743",
+            "unit": "us",
+            "extra": "100 samples\n1 iterations"
+          },
+          {
+            "name": "deSerializeJsonStringIfNeeded_large_escaped",
+            "value": 193.63325,
+            "range": "± 1.062660",
+            "unit": "us",
+            "extra": "100 samples\n1 iterations"
+          },
+          {
+            "name": "serializeJsonStringIfNeeded_large_escaped_with_space",
+            "value": 69.07781,
+            "range": "± 0.805225",
+            "unit": "us",
+            "extra": "100 samples\n1 iterations"
+          },
+          {
+            "name": "deSerializeJsonStringIfNeeded_large_escaped_with_space",
+            "value": 183.71813,
+            "range": "± 1.925415",
+            "unit": "us",
+            "extra": "100 samples\n1 iterations"
+          },
+          {
+            "name": "serializeJsonStringIfNeeded_small_nonascii",
+            "value": 0.20696,
+            "range": "± 0.001838",
+            "unit": "us",
+            "extra": "100 samples\n144 iterations"
+          },
+          {
+            "name": "deSerializeJsonStringIfNeeded_small_nonascii",
+            "value": 0.717412,
+            "range": "± 0.011355",
+            "unit": "us",
+            "extra": "100 samples\n42 iterations"
+          },
+          {
+            "name": "serializeJsonStringIfNeeded_small_nonascii_with_space",
+            "value": 0.150887,
+            "range": "± 0.005000",
+            "unit": "us",
+            "extra": "100 samples\n200 iterations"
+          },
+          {
+            "name": "deSerializeJsonStringIfNeeded_small_nonascii_with_space",
+            "value": 0.481199,
+            "range": "± 0.002445",
+            "unit": "us",
+            "extra": "100 samples\n62 iterations"
+          },
+          {
+            "name": "serializeJsonStringIfNeeded_large_nonascii",
+            "value": 114.39735,
+            "range": "± 3.036941",
+            "unit": "us",
+            "extra": "100 samples\n1 iterations"
+          },
+          {
+            "name": "deSerializeJsonStringIfNeeded_large_nonascii",
+            "value": 532.99321,
+            "range": "± 3.080633",
+            "unit": "us",
+            "extra": "100 samples\n1 iterations"
+          },
+          {
+            "name": "serializeJsonStringIfNeeded_large_nonascii_with_space",
+            "value": 86.096,
+            "range": "± 1.375906",
+            "unit": "us",
+            "extra": "100 samples\n1 iterations"
+          },
+          {
+            "name": "deSerializeJsonStringIfNeeded_large_nonascii_with_space",
+            "value": 440.70109,
+            "range": "± 2.951010",
             "unit": "us",
             "extra": "100 samples\n1 iterations"
           }
