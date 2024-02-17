@@ -23,7 +23,7 @@ jobs:
     runs-on: ubuntu-20.04
     steps:
       # Check out this repo
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
       - name: Update minetest revision
         run: |
           git config --global user.name "github-actions[bot]"
@@ -33,14 +33,14 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       # Checkout minetest
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
         if: ${{ env.DID_PUSH == 'true' }}
         with:
           repository: '${{ github.repository_owner }}/minetest'
           ref: ${{ env.MINETEST_REV }}
           path: 'minetest'
       # Checkout irrlicht
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
         if: ${{ env.DID_PUSH == 'true' }}
         with:
           repository: '${{ github.repository_owner }}/irrlicht'
