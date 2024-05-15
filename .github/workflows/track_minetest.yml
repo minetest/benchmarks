@@ -20,7 +20,7 @@ permissions:
 jobs:
   # Current gcc version
   update_repo:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
     steps:
       # Check out this repo
       - uses: actions/checkout@v4
@@ -28,7 +28,7 @@ jobs:
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          ./update-revs.sh  # sets MINETEST_REV, IRRLICHT_REV
+          ./update-revs.sh  # sets MINETEST_REV
           ./push-revs.sh    # sets DID_PUSH
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -39,19 +39,12 @@ jobs:
           repository: '${{ github.repository_owner }}/minetest'
           ref: ${{ env.MINETEST_REV }}
           path: 'minetest'
-      # Checkout irrlicht
-      - uses: actions/checkout@v4
-        if: ${{ env.DID_PUSH == 'true' }}
-        with:
-          repository: '${{ github.repository_owner }}/irrlicht'
-          ref: ${{ env.IRRLICHT_REV }}
-          path: 'minetest/lib/irrlichtmt'
       - name: Install deps
         if: ${{ env.DID_PUSH == 'true' }}
         run: |
           pushd minetest
-          source ./util/ci/common.sh --no-irr
-          install_linux_deps g++-10
+          source ./util/ci/common.sh
+          install_linux_deps g++-12
           popd
       - name: Build
         if: ${{ env.DID_PUSH == 'true' }}
@@ -60,8 +53,8 @@ jobs:
           ./util/ci/build.sh
           popd
         env:
-          CC: gcc-10
-          CXX: g++-10
+          CC: gcc-12
+          CXX: g++-12
           CMAKE_BUILD_TYPE: "Release"
           CMAKE_BUILD_SERVER: FALSE
           CMAKE_ENABLE_GETTEXT: FALSE
@@ -75,7 +68,7 @@ jobs:
       # gh-pages branch is updated and pushed automatically with extracted benchmark data
       - name: Store benchmark result
         if: ${{ env.DID_PUSH == 'true' }}
-        uses: benchmark-action/github-action-benchmark@3d3bca03e83647895ef4f911fa57de3c7a391aaf
+        uses: benchmark-action/github-action-benchmark@1846227a307d8c0149b960b986d46f8f4c95db0c
         with:
           name: Minetest Performance Benchmarks
           tool: 'catch2'
