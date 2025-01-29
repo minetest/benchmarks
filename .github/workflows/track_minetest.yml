@@ -58,7 +58,8 @@ jobs:
           CMAKE_BUILD_TYPE: "Release"
           CMAKE_BUILD_SERVER: FALSE
           CMAKE_ENABLE_GETTEXT: FALSE
-          CMAKE_FLAGS: "-DBUILD_BENCHMARKS=TRUE"
+          # Do not build tests: Tests may add spam to the benchmark output, letting parsing fail.
+          CMAKE_FLAGS: "-DBUILD_BENCHMARKS=TRUE -DBUILD_UNITTESTS=FALSE"
       - name: Run Benchmarks
         if: ${{ env.DID_PUSH == 'true' }}
         run: |
