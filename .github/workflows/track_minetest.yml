@@ -32,11 +32,11 @@ jobs:
           ./push-revs.sh    # sets DID_PUSH
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      # Checkout minetest
+      # Checkout Luanti
       - uses: actions/checkout@v4
         if: ${{ env.DID_PUSH == 'true' }}
         with:
-          repository: '${{ github.repository_owner }}/minetest'
+          repository: '${{ github.repository_owner }}/luanti'
           ref: ${{ env.MINETEST_REV }}
           path: 'minetest'
       - name: Install deps
