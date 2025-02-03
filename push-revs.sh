@@ -1,10 +1,10 @@
 #!/bin/bash -eu
 
-MINETEST_REV=`cat minetest.rev`
+LUANTI_REV=`cat luanti.rev`
 
 if ! git diff-index --quiet --cached HEAD ; then
   echo "Update detected. Pushing changes"
-  git commit -m "Minetest: ${MINETEST_REV}"
+  git commit -m "Luanti: ${LUANTI_REV}"
   git push "https://${GITHUB_ACTOR}:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git"
   DID_PUSH=true
 else

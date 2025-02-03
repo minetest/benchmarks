@@ -1,4 +1,4 @@
-name: track_minetest
+name: track_luanti
 
 # build on c/cpp changes or workflow changes
 on:
@@ -24,11 +24,11 @@ jobs:
     steps:
       # Check out this repo
       - uses: actions/checkout@v4
-      - name: Update minetest revision
+      - name: Update Luanti revision
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          ./update-revs.sh  # sets MINETEST_REV
+          ./update-revs.sh  # sets LUANTI_REV
           ./push-revs.sh    # sets DID_PUSH
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -37,19 +37,19 @@ jobs:
         if: ${{ env.DID_PUSH == 'true' }}
         with:
           repository: '${{ github.repository_owner }}/luanti'
-          ref: ${{ env.MINETEST_REV }}
-          path: 'minetest'
+          ref: ${{ env.LUANTI_REV }}
+          path: 'luanti'
       - name: Install deps
         if: ${{ env.DID_PUSH == 'true' }}
         run: |
-          pushd minetest
+          pushd luanti
           source ./util/ci/common.sh
           install_linux_deps g++-12
           popd
       - name: Build
         if: ${{ env.DID_PUSH == 'true' }}
         run: |
-          pushd minetest
+          pushd luanti
           ./util/ci/build.sh
           popd
         env:
@@ -63,15 +63,15 @@ jobs:
       - name: Run Benchmarks
         if: ${{ env.DID_PUSH == 'true' }}
         run: |
-          pushd minetest
-          ./bin/minetest --run-benchmarks | tee ../output.txt
+          pushd luanti
+          ./bin/luanti --run-benchmarks | tee ../output.txt
           popd
       # gh-pages branch is updated and pushed automatically with extracted benchmark data
       - name: Store benchmark result
         if: ${{ env.DID_PUSH == 'true' }}
         uses: benchmark-action/github-action-benchmark@1846227a307d8c0149b960b986d46f8f4c95db0c
         with:
-          name: Minetest Performance Benchmarks
+          name: Luanti Performance Benchmarks
           tool: 'catch2'
           output-file-path: output.txt
           # Access token to deploy GitHub Pages branch
@@ -83,6 +83,6 @@ jobs:
           comment-on-alert: false
           # Branch and path where benchmark is stored and updated.
           # This corresponds to:
-          #     https://minetest.github.io/minetest/dev/bench
+          #     https://www.luanti.org/benchmarks/dev/bench/
           gh-pages-branch: "gh-pages"
           benchmark-data-dir-path: "dev/bench"
