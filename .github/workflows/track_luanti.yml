@@ -64,7 +64,7 @@ jobs:
         if: ${{ env.DID_PUSH == 'true' }}
         run: |
           pushd luanti
-          ./bin/luanti --run-benchmarks | tee ../output.txt
+          ./bin/luanti --run-benchmarks 2>| tee ../output.txt
           popd
       # gh-pages branch is updated and pushed automatically with extracted benchmark data
       - name: Store benchmark result
